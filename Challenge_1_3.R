@@ -31,8 +31,8 @@ for (test in seq(1:tests)){
         } else {
           location == 'side' # Move bee to side 2 out of 3 times
         }
-      } else if (rand >= 4 && rand < 6){
-        distance_e <- distance_e # Move bee sideways 2 out of 6 times
+      } else if (rand == 4 || rand == 5){
+        # Distance stays the same, Move bee sideways 2 out of 6 times
         if (distance_e == 1){
           location <- 'corner'
         } else {
@@ -47,7 +47,7 @@ for (test in seq(1:tests)){
       if (rand < 3){
         distance_e <- distance_e + 1  # Move bee forward 2 out of 6 times
         location <- 'side' # Forward moves from a side always result on a side
-      } else if (rand >= 3 && rand < 5){
+      } else if (rand == 3 || rand == 4){
         randl <- sample(1:distance_e-1, 1)  # Select random number, used to determine if sideways move goes to corner or side
         distance_e <- distance_e  # Move bee sideways 2 out of 6 times
         if (randl == 1){
@@ -68,7 +68,6 @@ for (test in seq(1:tests)){
   }
   result <- append(result, distance_e) # Append latest test to vector of previous tests
   distance_e <- 0 # Reset distance for next test
-  location <- 'corner' # Reset location for next test
 }
 
 hist(result) # Sanity check, show histogram of results
